@@ -1,5 +1,10 @@
 package app.rodrigonovoa.githubrepositores.view.ui.repositoriesList
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,12 +38,42 @@ class RepositoriesListActivity : AppCompatActivity() {
         }
     }
 
-    private fun repositoriesObserver(){
+    private fun repositoriesObserver() {
         this.viewModel.repositoryList.observe(this) { repositories ->
             if (repositories != null) {
                 binding.rcRepositoriesList.layoutManager = LinearLayoutManager(this)
-                binding.rcRepositoriesList.adapter = RepositoriesListAdapter(repositories)
+                binding.rcRepositoriesList.adapter =
+                    RepositoriesListAdapter(
+                        repositories,
+                        RepositoriesListAdapter.OnClickListener { userUrl, repoUrl ->
+                            createRepositoryUrlDialog(
+                                this@RepositoriesListActivity,
+                                userUrl,
+                                repoUrl
+                            ).show()
+                        })
             }
         }
+    }
+
+    private fun createRepositoryUrlDialog(context: Context, userUrl: String, repoUrl: String): AlertDialog{
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage(R.string.browser_dialog_title)
+            .setPositiveButton(R.string.browser_dialog_user_url,
+                DialogInterface.OnClickListener { dialog, id ->
+                    openWebBrowser(context, userUrl)
+                })
+            .setNeutralButton(R.string.browser_dialog_repository_url,
+                DialogInterface.OnClickListener { dialog, id ->
+                    openWebBrowser(context, repoUrl)
+                })
+
+        return builder.create()
+    }
+
+    private fun openWebBrowser(context: Context, url: String){
+        val openURL = Intent(Intent.ACTION_VIEW)
+        openURL.data = Uri.parse(url)
+        context.startActivity(openURL)
     }
 }

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Github Repositores</string>
+    <string name="app_name">Github Repositories</string>
+
+    <string name="browser_dialog_title">Choose an option to open in the browser</string>
+    <string name="browser_dialog_user_url">User Page</string>
+    <string name="browser_dialog_repository_url">Repository Page</string>
 </resources>
