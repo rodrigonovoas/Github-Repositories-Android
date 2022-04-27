@@ -1,5 +1,7 @@
 package app.rodrigonovoa.githubrepositores.di
 
+import app.rodrigonovoa.githubrepositores.model.GithubRepository
+import app.rodrigonovoa.githubrepositores.model.RepositoryResponse
 import app.rodrigonovoa.githubrepositores.repository.GithubService
 import app.rodrigonovoa.githubrepositores.view.ui.repositoriesList.RepositoriesListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -9,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModules = module {
     single { provideService() }
+    single { GithubRepository(get()) }
 }
 
 private fun provideService(): GithubService {
