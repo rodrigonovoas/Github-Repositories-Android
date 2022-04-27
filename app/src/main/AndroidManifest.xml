@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubRepositores">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.ui.repositoriesList.RepositoriesListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
