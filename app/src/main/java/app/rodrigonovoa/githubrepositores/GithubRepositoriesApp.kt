@@ -1,6 +1,7 @@
 package app.rodrigonovoa.githubrepositores
 
 import android.app.Application
+import app.rodrigonovoa.githubrepositores.di.networkModules
 import app.rodrigonovoa.githubrepositores.di.viewModelModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
@@ -15,7 +16,7 @@ class GithubRepositoriesApp: Application() {
     private fun koinSetup(){
         startKoin {
             androidContext(this@GithubRepositoriesApp)
-            modules(viewModelModules)
+            modules(listOf(viewModelModules, networkModules))
         }
     }
 }
