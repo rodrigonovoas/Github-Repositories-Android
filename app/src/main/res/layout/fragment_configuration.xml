@@ -8,26 +8,45 @@
         android:id="@+id/tv_current_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Current User: " />
+        android:text="Current User: "
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/tv_select_new_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_current_user"
-        android:text="Select a new User" />
+        android:text="Select a new User"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"/>
 
-    <EditText
-        android:id="@+id/edt_new_user"
+    <LinearLayout
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        android:layout_below="@id/tv_select_new_user" />
+        android:layout_below="@id/tv_select_new_user"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edt_new_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/imv_username_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_search"
+            android:layout_alignRight="@+id/edt_new_user"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_users"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_new_user"/>
+        android:layout_below="@+id/ll_search"/>
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.rodrigonovoa.githubrepositores.R
 import app.rodrigonovoa.githubrepositores.databinding.ActivityGithubRepositoriesBinding
+import app.rodrigonovoa.githubrepositores.persistance.UserSingleton
 import app.rodrigonovoa.githubrepositores.view.adapters.RepositoriesListAdapter
 import app.rodrigonovoa.githubrepositores.view.adapters.UsersListAdapter
 import app.rodrigonovoa.githubrepositores.view.ui.configDialog.ConfigurationDialog
@@ -45,7 +46,7 @@ class RepositoriesListActivity : AppCompatActivity() {
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getRepositoriesFromApi()
+            viewModel.getRepositoriesFromApi(UserSingleton.username)
         }
     }
 
@@ -68,13 +69,23 @@ class RepositoriesListActivity : AppCompatActivity() {
     }
 
     private fun usersObserver() {
-        this.viewModel.usersList.observe(this) { repositories ->
-            if (repositories != null) {
+        this.viewModel.usersList.observe(this) { users ->
+            if (users != null) {
                 if(configDialog != null){
                     if(configDialog.dialog.isShowing){
                         val usersListRv = configDialog.dialog.findViewById<RecyclerView>(R.id.rc_users)
                         usersListRv.layoutManager = LinearLayoutManager(this)
-                        usersListRv.adapter = UsersListAdapter(repositories.items)
+                        if (users.items.isEmpty()) {
+                            usersListRv.adapter = null
+                        } else {
+                            usersListRv.adapter = UsersListAdapter(
+                                users.items,
+                                UsersListAdapter.OnClickListener { login ->
+                                    configDialog.closeDialog()
+                                    UserSingleton.username = login
+                                    viewModel.getRepositoriesFromApi(login)
+                                })
+                        }
                     }
                 }
             }

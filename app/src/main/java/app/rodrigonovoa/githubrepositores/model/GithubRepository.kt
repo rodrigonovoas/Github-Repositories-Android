@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 
 class GithubRepository(private val service: GithubService) {
-    suspend fun getRepositoriesFromApi(): Flow<Response<List<RepositoryResponse>>> = flow {
-        val repositories = service.getRepositories().execute()
+    suspend fun getRepositoriesFromApi(user: String): Flow<Response<List<RepositoryResponse>>> = flow {
+        val repositories = service.getRepositories(user).execute()
 
         emit(repositories)
     }.flowOn(Dispatchers.IO)

@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import app.rodrigonovoa.githubrepositores.R
 import app.rodrigonovoa.githubrepositores.model.RepositoryResponse
 
-class RepositoriesListAdapter(private val list: List<RepositoryResponse>, private val onClickListener: OnClickListener):
+class RepositoriesListAdapter(
+    private val list: List<RepositoryResponse>,
+    private val onClickListener: OnClickListener
+) :
     RecyclerView.Adapter<RepositoriesListAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

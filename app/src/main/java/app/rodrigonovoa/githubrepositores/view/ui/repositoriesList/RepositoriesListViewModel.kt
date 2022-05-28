@@ -20,9 +20,9 @@ class RepositoriesListViewModel(private val repository: GithubRepository): ViewM
     val usersList: LiveData<UserListResponse?> get() = _usersList
 
     @InternalCoroutinesApi
-    fun getRepositoriesFromApi(){
+    fun getRepositoriesFromApi(user: String){
         viewModelScope.launch {
-            repository.getRepositoriesFromApi()
+            repository.getRepositoriesFromApi(user)
                 .catch {
                     // error handling
                 }
