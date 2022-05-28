@@ -13,4 +13,9 @@ class GithubRepository(private val service: GithubService) {
 
         emit(repositories)
     }.flowOn(Dispatchers.IO)
+
+    suspend fun getUsersFromApi(query: String): Flow<Response<UserListResponse>> = flow {
+        val users = service.getUsersWithQuery(query, 1).execute()
+        emit(users)
+    }.flowOn(Dispatchers.IO)
 }

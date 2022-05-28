@@ -5,23 +5,26 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.rodrigonovoa.githubrepositores.R
 import app.rodrigonovoa.githubrepositores.databinding.ActivityGithubRepositoriesBinding
 import app.rodrigonovoa.githubrepositores.view.adapters.RepositoriesListAdapter
+import app.rodrigonovoa.githubrepositores.view.adapters.UsersListAdapter
+import app.rodrigonovoa.githubrepositores.view.ui.configDialog.ConfigurationDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 @InternalCoroutinesApi
 class RepositoriesListActivity : AppCompatActivity() {
     private val viewModel: RepositoriesListViewModel by inject()
+
+    private lateinit var configDialog: ConfigurationDialog
     private lateinit var binding: ActivityGithubRepositoriesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +32,15 @@ class RepositoriesListActivity : AppCompatActivity() {
         binding = ActivityGithubRepositoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        configDialog = ConfigurationDialog(this@RepositoriesListActivity, viewModel)
+
         repositoriesObserver()
+        usersObserver()
+        viewListeners()
+    }
+
+    private fun viewListeners() {
+        binding.imvConfig.setOnClickListener { configDialog.showDialog() }
     }
 
     init {
@@ -52,6 +63,20 @@ class RepositoriesListActivity : AppCompatActivity() {
                                 repoUrl
                             ).show()
                         })
+            }
+        }
+    }
+
+    private fun usersObserver() {
+        this.viewModel.usersList.observe(this) { repositories ->
+            if (repositories != null) {
+                if(configDialog != null){
+                    if(configDialog.dialog.isShowing){
+                        val usersListRv = configDialog.dialog.findViewById<RecyclerView>(R.id.rc_users)
+                        usersListRv.layoutManager = LinearLayoutManager(this)
+                        usersListRv.adapter = UsersListAdapter(repositories.items)
+                    }
+                }
             }
         }
     }

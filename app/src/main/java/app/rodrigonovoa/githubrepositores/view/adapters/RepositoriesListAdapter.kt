@@ -45,7 +45,6 @@ class RepositoriesListAdapter(private val list: List<RepositoryResponse>, privat
 
         viewHolder.cardViewRepository.setOnClickListener {
             onClickListener.onClick(getUserUrl(repository.owner.login), repository.html_url)
-            // return@setOnLongClickListener true
         }
     }
 

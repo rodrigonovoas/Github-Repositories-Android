@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_current_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current User: " />
+
+    <TextView
+        android:id="@+id/tv_select_new_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_current_user"
+        android:text="Select a new User" />
+
+    <EditText
+        android:id="@+id/edt_new_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_below="@id/tv_select_new_user" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_new_user"/>
+
+</RelativeLayout>

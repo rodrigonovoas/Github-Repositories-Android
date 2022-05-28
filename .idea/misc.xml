@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/kuluk/Documentos/Github/Github-Repositories-Android/app/src/main/res/layout/activity_github_repositories.xml" value="0.22192028985507245" />
+        <entry key="..\:/Users/kuluk/Documentos/Github/Github-Repositories-Android/app/src/main/res/layout/activity_github_repositories.xml" value="0.25" />
+        <entry key="..\:/Users/kuluk/Documentos/Github/Github-Repositories-Android/app/src/main/res/layout/fragment_configuration.xml" value="0.22192028985507245" />
         <entry key="..\:/Users/kuluk/Documentos/Github/Github-Repositories-Android/app/src/main/res/layout/item_repositories_list.xml" value="0.33" />
+        <entry key="..\:/Users/kuluk/Documentos/Github/Github-Repositories-Android/app/src/main/res/layout/item_users_list.xml" value="0.16734972677595628" />
         <entry key="..\:/Users/kuluk/Documents/GitHub/github-repositories-android/app/src/main/res/layout/activity_github_repositories.xml" value="0.22" />
         <entry key="..\:/Users/kuluk/Documents/GitHub/github-repositories-android/app/src/main/res/layout/item_repositories_list.xml" value="0.18854166666666666" />
       </map>
